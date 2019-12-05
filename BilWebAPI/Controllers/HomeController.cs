@@ -10,6 +10,7 @@ namespace BilWebAPI.Controllers
     {
         public ActionResult Index()
         {
+            // Hello :)
             ViewBag.Title = "Home Page";
 
             return View();
