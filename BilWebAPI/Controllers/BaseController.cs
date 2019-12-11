@@ -24,7 +24,9 @@ namespace BilWebAPI.Controllers
         // POST: api/Base
         public virtual void Post([FromBody]string value)
         {
-
+        }
+        public virtual void Post([FromBody]int value1, float value2, float value3, string value4)
+        {
         }
 
         // PUT: api/Base/5
