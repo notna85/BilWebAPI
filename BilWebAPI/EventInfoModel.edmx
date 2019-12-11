@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="communicating_carsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="event_creations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="event_id" Type="int" Nullable="false" />
+          <Property Name="user_registration_no" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="event_descriptions">
+          <Key>
+            <PropertyRef Name="event_type_id" />
+            <PropertyRef Name="language" />
+          </Key>
+          <Property Name="event_type_id" Type="int" Nullable="false" />
+          <Property Name="language" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="event_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="events">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="event_type_id" Type="int" Nullable="false" />
+          <Property Name="lon" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="lat" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="registration_no" />
+          </Key>
+          <Property Name="registration_no" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__event_cre__event__2E1BDC42">
+          <End Role="events" Type="Self.events" Multiplicity="1" />
+          <End Role="event_creations" Type="Self.event_creations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="event_creations">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__event_cre__user___2F10007B">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="event_creations" Type="Self.event_creations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="registration_no" />
+            </Principal>
+            <Dependent Role="event_creations">
+              <PropertyRef Name="user_registration_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__event_des__event__2B3F6F97">
+          <End Role="event_types" Type="Self.event_types" Multiplicity="1" />
+          <End Role="event_descriptions" Type="Self.event_descriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="event_descriptions">
+              <PropertyRef Name="event_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__events__event_ty__286302EC">
+          <End Role="event_types" Type="Self.event_types" Multiplicity="1" />
+          <End Role="events" Type="Self.events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="events">
+              <PropertyRef Name="event_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="create_event" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="event_type_id" Type="int" Mode="In" />
+          <Parameter Name="lon" Type="decimal" Mode="In" />
+          <Parameter Name="lat" Type="decimal" Mode="In" />
+          <Parameter Name="user_registration_no" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="communicating_carsModelStoreContainer">
+          <EntitySet Name="event_creations" EntityType="Self.event_creations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="event_descriptions" EntityType="Self.event_descriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="event_types" EntityType="Self.event_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="events" EntityType="Self.events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__event_cre__event__2E1BDC42" Association="Self.FK__event_cre__event__2E1BDC42">
+            <End Role="events" EntitySet="events" />
+            <End Role="event_creations" EntitySet="event_creations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__event_cre__user___2F10007B" Association="Self.FK__event_cre__user___2F10007B">
+            <End Role="users" EntitySet="users" />
+            <End Role="event_creations" EntitySet="event_creations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__event_des__event__2B3F6F97" Association="Self.FK__event_des__event__2B3F6F97">
+            <End Role="event_types" EntitySet="event_types" />
+            <End Role="event_descriptions" EntitySet="event_descriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__events__event_ty__286302EC" Association="Self.FK__events__event_ty__286302EC">
+            <End Role="event_types" EntitySet="event_types" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="communicating_carsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="event_creations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event_id" Type="Int32" Nullable="false" />
+          <Property Name="user_registration_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="event" Relationship="Self.FK__event_cre__event__2E1BDC42" FromRole="event_creations" ToRole="events" />
+          <NavigationProperty Name="user" Relationship="Self.FK__event_cre__user___2F10007B" FromRole="event_creations" ToRole="users" />
+        </EntityType>
+        <EntityType Name="event_descriptions">
+          <Key>
+            <PropertyRef Name="event_type_id" />
+            <PropertyRef Name="language" />
+          </Key>
+          <Property Name="event_type_id" Type="Int32" Nullable="false" />
+          <Property Name="language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="event_types" Relationship="Self.FK__event_des__event__2B3F6F97" FromRole="event_descriptions" ToRole="event_types" />
+        </EntityType>
+        <EntityType Name="event_types">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="event_descriptions" Relationship="Self.FK__event_des__event__2B3F6F97" FromRole="event_types" ToRole="event_descriptions" />
+          <NavigationProperty Name="events" Relationship="Self.FK__events__event_ty__286302EC" FromRole="event_types" ToRole="events" />
+        </EntityType>
+        <EntityType Name="event">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="event_type_id" Type="Int32" Nullable="false" />
+          <Property Name="lon" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="lat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="event_creations" Relationship="Self.FK__event_cre__event__2E1BDC42" FromRole="events" ToRole="event_creations" />
+          <NavigationProperty Name="event_types" Relationship="Self.FK__events__event_ty__286302EC" FromRole="events" ToRole="event_types" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="registration_no" />
+          </Key>
+          <Property Name="registration_no" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="event_creations" Relationship="Self.FK__event_cre__user___2F10007B" FromRole="users" ToRole="event_creations" />
+        </EntityType>
+        <Association Name="FK__event_cre__event__2E1BDC42">
+          <End Role="events" Type="Self.event" Multiplicity="1" />
+          <End Role="event_creations" Type="Self.event_creations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="events">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="event_creations">
+              <PropertyRef Name="event_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__event_cre__user___2F10007B">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="event_creations" Type="Self.event_creations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="registration_no" />
+            </Principal>
+            <Dependent Role="event_creations">
+              <PropertyRef Name="user_registration_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__event_des__event__2B3F6F97">
+          <End Role="event_types" Type="Self.event_types" Multiplicity="1" />
+          <End Role="event_descriptions" Type="Self.event_descriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="event_descriptions">
+              <PropertyRef Name="event_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__events__event_ty__286302EC">
+          <End Role="event_types" Type="Self.event_types" Multiplicity="1" />
+          <End Role="events" Type="Self.event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="event_types">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="events">
+              <PropertyRef Name="event_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ComCarsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="event_creations" EntityType="Self.event_creations" />
+          <EntitySet Name="event_descriptions" EntityType="Self.event_descriptions" />
+          <EntitySet Name="event_types" EntityType="Self.event_types" />
+          <EntitySet Name="events" EntityType="Self.event" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__event_cre__event__2E1BDC42" Association="Self.FK__event_cre__event__2E1BDC42">
+            <End Role="events" EntitySet="events" />
+            <End Role="event_creations" EntitySet="event_creations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__event_cre__user___2F10007B" Association="Self.FK__event_cre__user___2F10007B">
+            <End Role="users" EntitySet="users" />
+            <End Role="event_creations" EntitySet="event_creations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__event_des__event__2B3F6F97" Association="Self.FK__event_des__event__2B3F6F97">
+            <End Role="event_types" EntitySet="event_types" />
+            <End Role="event_descriptions" EntitySet="event_descriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__events__event_ty__286302EC" Association="Self.FK__events__event_ty__286302EC">
+            <End Role="event_types" EntitySet="event_types" />
+            <End Role="events" EntitySet="events" />
+          </AssociationSet>
+          <FunctionImport Name="create_event">
+            <Parameter Name="event_type_id" Mode="In" Type="Int32" />
+            <Parameter Name="lon" Mode="In" Type="Decimal" />
+            <Parameter Name="lat" Mode="In" Type="Decimal" />
+            <Parameter Name="user_registration_no" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CreateEventInfo">
+            <Parameter Name="event_type_id" Mode="In" Type="Int32" />
+            <Parameter Name="lon" Mode="In" Type="Decimal" />
+            <Parameter Name="lat" Mode="In" Type="Decimal" />
+            <Parameter Name="user_registration_no" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="communicating_carsModelStoreContainer" CdmEntityContainer="ComCarsEntities">
+          <EntitySetMapping Name="event_creations">
+            <EntityTypeMapping TypeName="communicating_carsModel.event_creations">
+              <MappingFragment StoreEntitySet="event_creations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="user_registration_no" ColumnName="user_registration_no" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="event_descriptions">
+            <EntityTypeMapping TypeName="communicating_carsModel.event_descriptions">
+              <MappingFragment StoreEntitySet="event_descriptions">
+                <ScalarProperty Name="event_type_id" ColumnName="event_type_id" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="event_types">
+            <EntityTypeMapping TypeName="communicating_carsModel.event_types">
+              <MappingFragment StoreEntitySet="event_types">
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="events">
+            <EntityTypeMapping TypeName="communicating_carsModel.event">
+              <MappingFragment StoreEntitySet="events">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="event_type_id" ColumnName="event_type_id" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="communicating_carsModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="registration_no" ColumnName="registration_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="create_event" FunctionName="communicating_carsModel.Store.create_event" />
+          <FunctionImportMapping FunctionImportName="CreateEventInfo" FunctionName="communicating_carsModel.Store.create_event" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

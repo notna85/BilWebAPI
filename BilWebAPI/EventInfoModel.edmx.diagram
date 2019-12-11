@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11a82914be3449a2b41ddf55f682aeef" Name="Diagram1">
+        <EntityTypeShape EntityType="communicating_carsModel.event_creations" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="communicating_carsModel.event_descriptions" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="communicating_carsModel.event_types" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="communicating_carsModel.event" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="communicating_carsModel.user" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="communicating_carsModel.FK__event_cre__event__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="communicating_carsModel.FK__event_cre__user___2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="communicating_carsModel.FK__event_des__event__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="communicating_carsModel.FK__events__event_ty__286302EC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
