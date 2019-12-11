@@ -22,7 +22,7 @@ namespace BilWebAPI.Controllers
             ei.Lon = lon;
             ei.Lat = lat;
             ei.UserRegNo = userRegNo;
-
+            //
             DBEIDAL dbeidal = new DBEIDAL();
             dbeidal.SaveEventInfo(ei.EventInfoType, ei.Lon, ei.Lat, ei.UserRegNo);
         }
