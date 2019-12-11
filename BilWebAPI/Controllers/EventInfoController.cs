@@ -18,6 +18,7 @@ namespace BilWebAPI.Controllers
             ei.Lat = lat;
             ei.UserRegNo = userRegNo;
 
+            //Test
             //Call DAL method
         }
     }
