@@ -16,21 +16,21 @@ namespace BilWebAPI.Controllers
         }
 
         // GET: api/Base/5
-        protected virtual string Get(int id)
+        public virtual string Get(int id)
         {
             return "value";
         }
 
         // POST: api/Base
-        public virtual void Post([FromBody]string value)
+        public virtual void Post(string value)
         {
         }
-        public virtual void Post([FromBody]int value1, float value2, float value3, string value4)
+        public virtual void Post(int value1, float value2, float value3, string value4)
         {
         }
 
         // PUT: api/Base/5
-        public virtual void Put(int id, [FromBody]string value)
+        public virtual void Put(int id, string value)
         {
 
         }

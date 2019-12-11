@@ -10,7 +10,12 @@ namespace BilWebAPI.Controllers
 {
     public class EventInfoController : BaseController
     {
-        override public void Post([FromBody]int eventTypeID, float lon, float lat, string userRegNo)
+        override public string Get(int id)
+        {
+            return "value";
+        }
+
+        override public void Post(int eventTypeID, float lon, float lat, string userRegNo)
         {
             EventInfo ei = new EventInfo();
             ei.EventInfoType = eventTypeID;
@@ -18,7 +23,8 @@ namespace BilWebAPI.Controllers
             ei.Lat = lat;
             ei.UserRegNo = userRegNo;
 
-            //Call DAL method
+            DBEIDAL dbeidal = new DBEIDAL();
+            dbeidal.SaveEventInfo(ei.EventInfoType, ei.Lon, ei.Lat, ei.UserRegNo);
         }
     }
 }
