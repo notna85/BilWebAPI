@@ -10,7 +10,7 @@ namespace BilWebAPI
 {
     public class DBEIDAL : IEIDAL
     {
-        string connectionString = "Server=192.168.10.2;Database=communicating_cars;User Id=sa;Password=Password1;";
+        string connectionString = "Server=192.168.1.200;Database=communicating_cars;User Id=sa;Password=Password1;";
 
         // Inserts an event_info into the database.
         public void SaveEventInfo(int eventTypeID, double lon, double lat, string userRegistrationNo)
