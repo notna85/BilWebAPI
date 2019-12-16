@@ -10,7 +10,7 @@ namespace BilWebAPI
 {
     public class DBEIDAL : IEIDAL
     {
-        public string ConnectionString { get; set; } = "Server=192.168.10.2;Database=communicating_cars;User Id=sa;Password=Password1;";
+        public string ConnectionString { get; set; } = "Server = 192.168.1.200; Database = communicating_cars; User Id=sa; Password = Password1;";
 
         // Inserts an event_info into the database.
         public void SaveEventInfo(int eventTypeID, double lon, double lat, string userRegistrationNo)
@@ -42,9 +42,13 @@ namespace BilWebAPI
                 }
             }
         }
+        
+        //Returns info from the database in the form of a list of lists
         public List<List<string>> GetEventInfo()
         {
+            //The list to return
             List<List<string>> result = new List<List<string>> { };
+            //The list to be used for populating the above list
             List<string> resultRow = new List<string> { };
 
             string sqlQuery = "select * from event_infos";
