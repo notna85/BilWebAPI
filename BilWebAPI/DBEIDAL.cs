@@ -44,23 +44,23 @@ namespace BilWebAPI
         }
         
         //Returns info from the database in the form of a list of lists
-        public List<List<string>> GetEventInfo()
+        public List<List<string>> GetEventInfo(string language)
         {
             //The list to return
             List<List<string>> result = new List<List<string>> { };
-            //The list to be used for populating the above list
-            List<string> resultRow = new List<string> { };
 
-            string sqlQuery = "select * from event_infos";
+            string sqlQuery = "exec get_event_info @language = @pLanguage";
 
             using (SqlConnection cnn = new SqlConnection(ConnectionString))
             {
                 cnn.Open();
                 SqlCommand cmd = new SqlCommand(sqlQuery, cnn);
+                cmd.Parameters.Add("@pLanguage", SqlDbType.VarChar).Value = language;
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    resultRow.Clear();
+                    //The list to be used for populating the above list
+                    List<string> resultRow = new List<string> { };
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         resultRow.Add(reader.GetValue(i).ToString());

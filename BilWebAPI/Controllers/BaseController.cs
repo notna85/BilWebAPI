@@ -9,7 +9,7 @@ namespace BilWebAPI.Controllers
 {
     public abstract class BaseController : ApiController
     {
-        public virtual List<List<string>> Get()
+        public virtual List<List<string>> Get(string value)
         {
             return new List<List<string>> { };
         }

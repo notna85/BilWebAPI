@@ -10,10 +10,10 @@ namespace BilWebAPI.Controllers
 {
     public class EventInfoController : BaseController
     {
-        override public List<List<string>> Get()
+        override public List<List<string>> Get(string language)
         {
             DBEIDAL dbeidal = new DBEIDAL();
-            return dbeidal.GetEventInfo();
+            return dbeidal.GetEventInfo(language);
         }
 
         override public void Post(int eventTypeID, float lon, float lat, string userRegNo)
