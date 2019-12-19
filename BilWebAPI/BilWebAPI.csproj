@@ -163,6 +163,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IUDAL.cs" />
     <Compile Include="Models\EventInfo.cs" />
     <Compile Include="Interfaces\IEIDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

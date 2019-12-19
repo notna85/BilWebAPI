@@ -4,21 +4,16 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BilWebAPI.Models;
 
 namespace BilWebAPI.Controllers
 {
     public abstract class BaseController : ApiController
     {
         // GET: api/Base
-        public virtual IEnumerable<string> Get()
+        public virtual List<List<string>> Get()
         {
             return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Base/5
-        protected virtual string Get(int id)
-        {
-            return "value";
         }
 
         // POST: api/Base

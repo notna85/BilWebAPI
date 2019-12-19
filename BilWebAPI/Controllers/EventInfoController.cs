@@ -10,6 +10,15 @@ namespace BilWebAPI.Controllers
 {
     public class EventInfoController : BaseController
     {
+        override public List<List<string>> Get()
+        {
+            List<List<string>> eventInfoList = null;
+
+            // eventInfoLost = [Call DAL method]
+
+            return eventInfoList;
+        }
+
         override public void Post([FromBody]int eventTypeID, float lon, float lat, string userRegNo)
         {
             EventInfo ei = new EventInfo();
