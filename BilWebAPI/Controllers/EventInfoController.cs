@@ -16,6 +16,12 @@ namespace BilWebAPI.Controllers
             return dbeidal.GetEventInfo(language);
         }
 
+        override public List<string> Get(int event_info_id, string language)
+        {
+            DBEIDAL dbeidal = new DBEIDAL();
+            return dbeidal.GetEventInfoByID(event_info_id, language);
+        }
+
         override public void Post(int eventTypeID, float lon, float lat, string userRegNo)
         {
             EventInfo ei = new EventInfo();
