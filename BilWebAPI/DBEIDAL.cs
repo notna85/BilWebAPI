@@ -72,6 +72,7 @@ namespace BilWebAPI
             return result;
         }
 
+
         //Returns info from the database in the form of a list
         public List<string> GetEventInfoByID(int event_info_id, string language)
         {
