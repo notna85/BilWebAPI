@@ -14,9 +14,9 @@ namespace BilWebAPI.Controllers
             return new List<List<string>> { };
         }
 
-        public virtual string Get(int id)
+        public virtual List<string> Get(int id, string value)
         {
-            return "value";
+            return new List<string> { };
         }
 
         public virtual void Post(string value)
