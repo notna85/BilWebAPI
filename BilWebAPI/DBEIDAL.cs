@@ -72,26 +72,24 @@ namespace BilWebAPI
             return result;
         }
 
-        /*
-         * Returns info from the database in the form of a list
-         */
-        public List<string> GetEventInfoByID(int eventInfoID, string language)
+
+        //Returns info from the database in the form of a list
+        public List<string> GetEventInfoByID(int event_info_id, string language)
         {
             //The list to return
             List<string> result = new List<string> { };
 
-            string sqlQuery = "exec get_event_info_by_id @event_info_id = @pEvent_Info_ID, @language = @pLanguage";
+            string sqlQuery = "exec get_event_info_by_id @id = @pId, @language = @pLanguage";
 
             using (SqlConnection cnn = new SqlConnection(ConnectionString))
             {
                 cnn.Open();
                 SqlCommand cmd = new SqlCommand(sqlQuery, cnn);
-                cmd.Parameters.Add("@pEvent_Info_ID", SqlDbType.VarChar).Value = eventInfoID;
+                cmd.Parameters.Add("@pId", SqlDbType.VarChar).Value = event_info_id;
                 cmd.Parameters.Add("@pLanguage", SqlDbType.VarChar).Value = language;
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    //The list to be used for populating the above list
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         result.Add(reader.GetValue(i).ToString());

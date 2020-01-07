@@ -15,7 +15,7 @@ namespace BilWebAPI.Controllers
             return new List<List<string>> { };
         }
 
-        public virtual List<string> Get(int eventInfoID, string value)
+        public virtual List<string> Get(int id, string value)
         {
             return new List<string> { };
         }
