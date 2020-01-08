@@ -5,24 +5,34 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BilWebAPI.Models;
+using BilWebAPI.Repositories;
 
 namespace BilWebAPI.Controllers
 {
     public class UserController : ApiController
     {
+        [HttpGet]
         public User GetUserByRegNo(string regNo)
         {
-            return new User();
+            RepositoryUserDB rUDB = new RepositoryUserDB();
+            return rUDB.GetUserByRegNo(regNo);           
         }
 
+        [HttpGet]
         public User CheckLogin(string username, string password)
         {
-            return new User();
+            User user = new User(username, password);
+            RepositoryUserDB rUDB = new RepositoryUserDB();            
+            return rUDB.GetSessionInfo(user);
         }
 
-        public List<EventInfoConfirm> GetUserBySID(string SID, string username, string language)
+        [HttpGet]
+        public User GetUserBySID(string SID, string username, string language)
         {
-            return new List<EventInfoConfirm>();
+            RepositoryUserDB rUDB = new RepositoryUserDB();
+            User user = rUDB.GetUserBySID(SID, username);
+            user.Language = language;
+            return user;
         }
     }
 }

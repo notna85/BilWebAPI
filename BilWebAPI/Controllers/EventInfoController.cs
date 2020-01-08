@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BilWebAPI.Models;
+using BilWebAPI.Repositories;
 
 namespace BilWebAPI.Controllers
 {
@@ -16,6 +17,7 @@ namespace BilWebAPI.Controllers
 
         public List<EventInfoConfirm> GetEventInfo(string SID, string username, string language)
         {
+            
             return new List<EventInfoConfirm>();
         }
 
