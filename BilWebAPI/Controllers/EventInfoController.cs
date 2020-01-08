@@ -5,23 +5,52 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BilWebAPI.Models;
+using BilWebAPI.Repositories;
 
 namespace BilWebAPI.Controllers
 {
     public class EventInfoController : ApiController
     {
-        public void Post(int eventInfoTypeID, float lon, float lat, string regNo)
+        public void Post(int eventInfoTypeID, decimal lon, decimal lat, string regNo)
         {
+            /// Creates a UserController which will get a user from the database by its Registration Number.
+            UserController uc = new UserController();
+            User user = uc.GetUserByRegNo(regNo);
+
+            /// Creates an EventInfoConfirm with the provided parameters.
+            EventInfoConfirm eventInfoConfirm = new EventInfoConfirm(eventInfoTypeID, lon, lat, user);
+
+            /// Creates an EventInfoDB to add the EventInfoConfirm to the database.
+            RepositoryEventInfoDB eiDB = new RepositoryEventInfoDB();
+            eiDB.Add(eventInfoConfirm);
         }
 
-        public List<EventInfoConfirm> GetEventInfo(string SID, string username, string language)
+        public List<EventInfoConfirm> GetAllEventInfo(string SID, string username, string language)
         {
-            return new List<EventInfoConfirm>();
+            /// Creates a UserController which will get a user from the database by its sessionID.
+            UserController uc = new UserController();
+            User user = uc.GetUserBySID(SID, username, language);
+
+            /// Creates an EventInfoDB get a list of EventInfoConfirms.
+            RepositoryEventInfoDB eiDB = new RepositoryEventInfoDB();
+            List<EventInfoConfirm> eventInfoConfirms = eiDB.GetAllEventInfo(user);
+
+            /// Returns list of EventInfoConfirms.
+            return eventInfoConfirms;
         }
 
-        public EventInfoConfirm GetEventInfoByID(int eventInfoId, string SID, string username, string language)
+        public EventInfoConfirm GetEventInfoByID(int eventInfoID, string SID, string username, string language)
         {
-            return new EventInfoConfirm(new DateTime(), new EventInfo(0f, 0f, 0, new EventInfoType("0", "0", 0)), new User());
+            /// Creates a UserController which will get a user from the database by its sessionID.
+            UserController uc = new UserController();
+            User user = uc.GetUserBySID(SID, username, language);
+
+            /// Creates an EventInfoDB get a list of EventInfoConfirms.
+            RepositoryEventInfoDB eiDB = new RepositoryEventInfoDB();
+            EventInfoConfirm eiConfirm = eiDB.GetEventInfoByID(eventInfoID, user);
+
+            /// Returns EventInfoConfirm.
+            return eiConfirm;
         }
     }
     

@@ -15,10 +15,22 @@ namespace BilWebAPI.Models
         public EventInfo EI { get; set; }
         public User User { get;  set; }
 
-        public EventInfoConfirm(DateTime time, EventInfo ei, User user)
+        public EventInfoConfirm()
         {
-            Time = time;
+
+        }
+
+        public EventInfoConfirm(int eventInfoTypeID, decimal lon, decimal lat, User user)
+        {
+            Time = new DateTime();
             EI = ei;
+            User = user;
+        }
+
+        public EventInfoConfirm(int eventInfoTypeID, decimal lon, decimal lat, int confirmCount, User user, string title, string description)
+        {
+            Time = new DateTime();
+            EI = new EventInfo(lon, lat, confirmCount, eventInfoTypeID, title, description);
             User = user;
         }
     }

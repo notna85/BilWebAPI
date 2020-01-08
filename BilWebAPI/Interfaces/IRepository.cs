@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BilWebAPI.Interfaces
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         void Add(T t);
         void Remove(T t);

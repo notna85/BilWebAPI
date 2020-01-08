@@ -11,6 +11,11 @@ namespace BilWebAPI.Models
 
         public string RegNo { get; set; }
 
+        public Car()
+        {
+
+        }
+
         public Car(string regNo)
         {
             RegNo = regNo;

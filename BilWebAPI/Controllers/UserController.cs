@@ -20,9 +20,9 @@ namespace BilWebAPI.Controllers
             return new User();
         }
 
-        public List<EventInfoConfirm> GetUserBySID(string SID, string username, string language)
+        public User GetUserBySID(string SID, string username, string language)
         {
-            return new List<EventInfoConfirm>();
+            return new User();
         }
     }
 }

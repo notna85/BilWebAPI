@@ -7,22 +7,26 @@ namespace BilWebAPI.Models
 {
     public class EventInfo
     {
-        private float lon;
-        private float lat;
+        private decimal lon;
+        private decimal lat;
         private int confirmCount;
         private EventInfoType eIType;
 
-        public float Lon { get; set; }
-        public float Lat { get; set; }
+        public decimal Lon { get; set; }
+        public decimal Lat { get; set; }
         public int ConfirmCount { get; set; }
         public EventInfoType EIType { get; set; } 
 
-        public EventInfo(float lon, float lat, int confirmCount, EventInfoType eIType)
+        public EventInfo()
+        {
+
+        }
+        public EventInfo(decimal lon, decimal lat, int confirmCount, int eventInfoTypeID, string title, string description)
         {
             Lon = lon;
             Lat = lat;
             ConfirmCount = confirmCount;
-            EIType = eIType;
+            EIType = new EventInfoType(title, description, eventInfoTypeID);
         }
     }
 }

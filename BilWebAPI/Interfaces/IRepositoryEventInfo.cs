@@ -8,7 +8,7 @@ using BilWebAPI.Models;
 
 namespace BilWebAPI.Interfaces
 {
-    interface IRepositoryEventInfo<EventInfoConfirm> : IRepository<EventInfoConfirm>
+    public interface IRepositoryEventInfo<EventInfoConfirm> : IRepository<EventInfoConfirm>
     {
         List<EventInfoConfirm> GetAllEventInfo(User user);
         EventInfoConfirm GetEventInfoByID(int eventInfoID, User user);

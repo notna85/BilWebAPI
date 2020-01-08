@@ -15,6 +15,11 @@ namespace BilWebAPI.Models
         public string Description { get; set; }
         public int ID { get; set; }
 
+        public EventInfoType()
+        {
+
+        }
+
         public EventInfoType(string title, string description, int id)
         {
             Title = title;

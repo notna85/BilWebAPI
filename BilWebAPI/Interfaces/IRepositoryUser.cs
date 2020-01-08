@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BilWebAPI.Interfaces
 {
-    interface IRepositoryUser<User> : IRepository<User>
+    public interface IRepositoryUser<User> : IRepository<User>
     {
         User GetSessionInfo(User user);
         User GetUserBySID(string SID, string username);
