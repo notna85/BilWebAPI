@@ -8,7 +8,8 @@ using System.Data;
 
 namespace BilWebAPI
 {
-    public class DBEIDAL : IEIDAL
+    ///
+    public class DBEIDAL
     {
         public string ConnectionString { get; set; } = "Server = 192.168.1.200; Database = communicating_cars; User Id=sa; Password = Password1;";
 
