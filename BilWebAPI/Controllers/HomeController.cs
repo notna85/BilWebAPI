@@ -13,9 +13,9 @@ namespace BilWebAPI.Controllers
             // Hello :)
             ViewBag.Title = "Home Page";
 
-            DBEIDAL db = new DBEIDAL();
+            //DBEIDAL db = new DBEIDAL();
 
-            db.SaveEventInfo(3, 88.999999, 88.999999, "BB 33 444");
+            //db.SaveEventInfo(3, 88.999999, 88.999999, "BB 33 444");
 
             return View();
         }
