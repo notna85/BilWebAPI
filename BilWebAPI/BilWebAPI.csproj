@@ -158,15 +158,25 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EventInfoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DBEIDAL.cs" />
+    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\EventInfoConfirm.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IRepositoryEventInfo.cs" />
     <Compile Include="Interfaces\IUDAL.cs" />
     <Compile Include="Models\EventInfo.cs" />
     <Compile Include="Interfaces\IEIDAL.cs" />
+    <Compile Include="Models\EventInfoType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IRepositoryUser.cs" />
+    <Compile Include="Repositories\RepositoryEventInfoDB.cs" />
+    <Compile Include="Repositories\RepositoryUserDB.cs" />
+    <Compile Include="Models\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

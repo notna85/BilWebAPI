@@ -8,30 +8,46 @@ using BilWebAPI.Models;
 
 namespace BilWebAPI.Controllers
 {
-    public class EventInfoController : BaseController
+    public class EventInfoController : ApiController
     {
-        override public List<List<string>> Get(string language)
+        public void Post(int eventInfoTypeID, float lon, float lat, string regNo)
         {
-            DBEIDAL dbeidal = new DBEIDAL();
-            return dbeidal.GetEventInfo(language);
         }
 
-        override public List<string> Get(int event_info_id, string language)
+        public List<EventInfoConfirm> GetEventInfo(string SID, string username, string language)
         {
-            DBEIDAL dbeidal = new DBEIDAL();
-            return dbeidal.GetEventInfoByID(event_info_id, language);
+            return new List<EventInfoConfirm>();
         }
 
-        override public void Post(int eventTypeID, float lon, float lat, string userRegNo)
+        public EventInfoConfirm GetEventInfoByID(int eventInfoId, string SID, string username, string language)
         {
-            EventInfo ei = new EventInfo();
-            ei.EventInfoType = eventTypeID;
-            ei.Lon = lon;
-            ei.Lat = lat;
-            ei.UserRegNo = userRegNo;
-            //
-            DBEIDAL dbeidal = new DBEIDAL();
-            dbeidal.SaveEventInfo(ei.EventInfoType, ei.Lon, ei.Lat, ei.UserRegNo);
+            return new EventInfoConfirm(new DateTime(), new EventInfo(0f, 0f, 0, new EventInfoType("0", "0", 0)), new User());
         }
     }
+    
+
+    //    public List<List<string>> Get(string language)
+    //    {
+    //        DBEIDAL dbeidal = new DBEIDAL();
+    //        return dbeidal.GetEventInfo(language);
+    //    }
+
+    //    override public List<string> Get(int event_info_id, string language)
+    //    {
+    //        DBEIDAL dbeidal = new DBEIDAL();
+    //        return dbeidal.GetEventInfoByID(event_info_id, language);
+    //    }
+
+    //    override public void Post(int eventTypeID, float lon, float lat, string userRegNo)
+    //    {
+    //        EventInfo ei = new EventInfo();
+    //        ei.EventInfoType = eventTypeID;
+    //        ei.Lon = lon;
+    //        ei.Lat = lat;
+    //        ei.UserRegNo = userRegNo;
+    //        //
+    //        DBEIDAL dbeidal = new DBEIDAL();
+    //        dbeidal.SaveEventInfo(ei.EventInfoType, ei.Lon, ei.Lat, ei.UserRegNo);
+    //    }
+    //}
 }
