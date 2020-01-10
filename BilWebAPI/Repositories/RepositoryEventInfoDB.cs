@@ -29,8 +29,8 @@ namespace BilWebAPI.Repositories
                         cmd.Parameters.Add("@pEvent_Info_Type_ID", SqlDbType.Decimal).Value = eventInfoConfirm.EI.EIType.ID;
                         cmd.Parameters.Add("@pLon", SqlDbType.Decimal).Value = eventInfoConfirm.EI.Lon;
                         cmd.Parameters.Add("@pLat", SqlDbType.Decimal).Value = eventInfoConfirm.EI.Lat;
-                        cmd.Parameters.Add("@pTime_Of_Confirm", SqlDbType.DateTime).Value = eventInfoConfirm.EI.Lat;
-                        cmd.Parameters.Add("@pUsername", SqlDbType.VarChar).Value = eventInfoConfirm.EI.Lat;
+                        cmd.Parameters.Add("@pTime_Of_Confirm", SqlDbType.DateTime).Value = eventInfoConfirm.Time;
+                        cmd.Parameters.Add("@pUsername", SqlDbType.VarChar).Value = eventInfoConfirm.User.Username;
 
                         // Executes the non-query.
                         cmd.ExecuteNonQuery();
@@ -43,11 +43,11 @@ namespace BilWebAPI.Repositories
                 }
             }
         }
-
+        
         public List<EventInfoConfirm> GetAllEventInfo(User user)
         {
             List<EventInfoConfirm> eventInfoConfirms = new List<EventInfoConfirm>();
-
+            
             // Creates a connection to the database using the connection string.
             using (SqlConnection cnn = new SqlConnection(ConnectionString))
             {
@@ -59,14 +59,14 @@ namespace BilWebAPI.Repositories
                     using (SqlCommand cmd = new SqlCommand("exec get_all_event_infos @language = @pLanguage", cnn))
                     {
                         // Adds parameters to the query
-                        cmd.Parameters.Add("@pLanguage", SqlDbType.VarChar).Value = "DK";
+                        cmd.Parameters.Add("@pLanguage", SqlDbType.VarChar).Value = user.Language;
 
                         // Executes the query, getting longitude and latitude.
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
                             EventInfoConfirm eiConfirm = new EventInfoConfirm((int)reader["event_info_type_id"], (decimal)reader["lon"], (decimal)reader["lat"],
-                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"]);
+                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"], (int)reader["event_info_id"]);
 
                             eventInfoConfirms.Add(eiConfirm);
                         }
@@ -109,8 +109,8 @@ namespace BilWebAPI.Repositories
                         SqlDataReader reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            eiConfirm = new EventInfoConfirm(eventInfoID, (decimal)reader["lon"], (decimal)reader["lat"],
-                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"]);
+                            eiConfirm = new EventInfoConfirm((int)reader["event_info_type_id"], (decimal)reader["lon"], (decimal)reader["lat"],
+                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"], (int)reader["event_info_id"]);
                         }
                     }
                 }

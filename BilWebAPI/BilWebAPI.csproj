@@ -159,7 +159,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DBEIDAL.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\EventInfoConfirm.cs" />
     <Compile Include="Global.asax.cs">

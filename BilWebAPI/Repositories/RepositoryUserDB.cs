@@ -23,6 +23,7 @@ namespace BilWebAPI.Repositories
             throw new NotImplementedException();
         }
 
+        //Method accepts a user object and adds a session id to said object if the supplied parameters are valid.
         public User GetSessionInfo(User user)
         {
             string sqlQuery = "exec login @username = @pUsername, @password = @pPassword";
@@ -34,14 +35,28 @@ namespace BilWebAPI.Repositories
                 cmd.Parameters.Add("@pUsername", SqlDbType.VarChar).Value = user.Username;
                 cmd.Parameters.Add("@pPassword", SqlDbType.VarChar).Value = user.Password;
                 SqlDataReader reader = cmd.ExecuteReader();
+                
+                //User object to return
+                User returnedUser = new User();
+                returnedUser.Username = user.Username;
+
                 reader.Read();
-                user.SessionID = reader["session_id"].ToString();
-                user.Language = reader["language"].ToString();
+                //If username or password are incorrect, the reader will fail. In that case, the properties are set to empty strings.
+                try
+                {
+                    returnedUser.SessionID = reader["session_id"].ToString();
+                    returnedUser.Language = reader["language"].ToString();
+                }
+                catch(InvalidOperationException)
+                {
+                    returnedUser.SessionID = "";
+                    returnedUser.Language = "";
+                }
 
                 reader.Close();
                 cnn.Close();
 
-                return user;
+                return returnedUser;
             }
         }
 
@@ -57,7 +72,14 @@ namespace BilWebAPI.Repositories
                 SqlDataReader reader = cmd.ExecuteReader();
                 User user = new User();
                 reader.Read();
-                user.Username = reader["username"].ToString();
+                try
+                {
+                    user.Username = reader["username"].ToString();
+                }
+                catch(InvalidOperationException)
+                {
+                    user.Username = "";
+                }
             
                 reader.Close();
                 cnn.Close();
@@ -66,6 +88,7 @@ namespace BilWebAPI.Repositories
             }
         }
 
+        //Method returns a user object containing their current session id. Later used to determine whether a user should be logged off or prolong said session.
         public User GetUserBySID(string SID, string username)
         {
             string sqlQuery = "exec check_session_id @session_id = @pSID, @username = @pUsername";
@@ -79,9 +102,16 @@ namespace BilWebAPI.Repositories
                 SqlDataReader reader = cmd.ExecuteReader();
                 User user = new User();
                 reader.Read();
-                user.Username = reader["username"].ToString();
-                user.SessionID = reader["session_id"].ToString();
-                
+                try
+                {
+                    user.Username = reader["username"].ToString();
+                    user.SessionID = reader["session_id"].ToString();
+                }
+                catch(InvalidOperationException)
+                {
+                    user.Username = "";
+                    user.SessionID = "";
+                }                
                 reader.Close();
                 cnn.Close();
 
