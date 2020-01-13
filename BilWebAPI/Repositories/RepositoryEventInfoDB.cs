@@ -66,7 +66,7 @@ namespace BilWebAPI.Repositories
                         while (reader.Read())
                         {
                             EventInfoConfirm eiConfirm = new EventInfoConfirm((int)reader["event_info_type_id"], (decimal)reader["lon"], (decimal)reader["lat"],
-                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"], (int)reader["event_info_id"]);
+                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"], (int)reader["event_info_id"], (int)reader["time_since_last_confirm"]);
 
                             eventInfoConfirms.Add(eiConfirm);
                         }
@@ -110,7 +110,7 @@ namespace BilWebAPI.Repositories
                         while (reader.Read())
                         {
                             eiConfirm = new EventInfoConfirm((int)reader["event_info_type_id"], (decimal)reader["lon"], (decimal)reader["lat"],
-                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"], (int)reader["event_info_id"]);
+                                (int)reader["confirmed times"], user, (string)reader["title"], (string)reader["description"], (int)reader["event_info_id"], (DateTime)reader["time_of_confirm"]);
                         }
                     }
                 }

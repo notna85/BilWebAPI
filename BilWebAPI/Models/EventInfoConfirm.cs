@@ -31,9 +31,15 @@ namespace BilWebAPI.Models
             User = user;
         }
 
-        public EventInfoConfirm(int eventInfoTypeID, decimal lon, decimal lat, int confirmCount, User user, string title, string description, int eventID)
+        public EventInfoConfirm(int eventInfoTypeID, decimal lon, decimal lat, int confirmCount, User user, string title, string description, int eventID, int timeSinceLastConfirm)
+        {          
+            EI = new EventInfo(lon, lat, confirmCount, eventInfoTypeID, title, description, eventID, timeSinceLastConfirm);
+            User = user;
+        }
+
+        public EventInfoConfirm(int eventInfoTypeID, decimal lon, decimal lat, int confirmCount, User user, string title, string description, int eventID, DateTime date)
         {
-            Time = DateTime.Now;
+            Time = date;
             EI = new EventInfo(lon, lat, confirmCount, eventInfoTypeID, title, description, eventID);
             User = user;
         }

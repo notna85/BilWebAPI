@@ -11,7 +11,7 @@ namespace BilWebAPI.Controllers
 {
     public class EventInfoController : ApiController
     {
-        [HttpGet, HttpPost]
+        [HttpPost]
         public void Post(int eventInfoTypeID, decimal lon, decimal lat, string regNo)
         {
             /// Creates a UserController which will get a user from the database by its Registration Number.

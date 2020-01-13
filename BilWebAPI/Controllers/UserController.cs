@@ -21,6 +21,11 @@ namespace BilWebAPI.Controllers
         [HttpGet]
         public User CheckLogin(string username, string password)
         {
+            if (username == null || password == null)
+            {
+                username = "";
+                password = "";
+            }
             User user = new User(username, password);
             RepositoryUserDB rUDB = new RepositoryUserDB();            
             return rUDB.GetSessionInfo(user);

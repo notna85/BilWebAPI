@@ -18,6 +18,7 @@ namespace BilWebAPI.Models
         public int ConfirmCount { get; set; }
         public EventInfoType EIType { get; set; } 
         public int ID { get; set; }
+        public int TimeSinceLastConfirm { get; set; }
 
         public EventInfo()
         {
@@ -28,6 +29,15 @@ namespace BilWebAPI.Models
             Lon = lon;
             Lat = lat;
             EIType = new EventInfoType(eventInfoTypeID);
+        }
+        public EventInfo(decimal lon, decimal lat, int confirmCount, int eventInfoTypeID, string title, string description, int id, int timeSinceLastConfirm)
+        {
+            Lon = lon;
+            Lat = lat;
+            ConfirmCount = confirmCount;
+            EIType = new EventInfoType(title, description, eventInfoTypeID);
+            ID = id;
+            TimeSinceLastConfirm = timeSinceLastConfirm;
         }
         public EventInfo(decimal lon, decimal lat, int confirmCount, int eventInfoTypeID, string title, string description, int id)
         {
